@@ -1,0 +1,22 @@
+ A task is a function that returns a promise which is expected to never be rejected.
+
+An Either is a type that represents a synchronous operation that can succeed or fail. Much like Option, where it is Some or None, the Either type is either Right or Left. Right represents success and Left represents failure. It is analogous to the Result type in Rust.
+
+type Either<E, A> = Left<E> | Right<A>
+
+export interface Left<E> {
+  readonly _tag: 'Left'
+  readonly left: E
+}
+
+export interface Right<A> {
+  readonly _tag: 'Right'
+  readonly right: A
+}
+
+The Either type is a union type of Left and Right. The _tag field is used as a discriminator to differentiate between Left and Right.
+
+TaskEither
+We know a Task is an asynchronous operation that can't fail. We also know an Either is a synchronous operation that can fail. Putting the two together, a TaskEither is an asynchronous operation that can fail.
+
+
